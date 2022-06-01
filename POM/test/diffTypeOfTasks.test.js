@@ -13,6 +13,7 @@ fixture('Create new tasks')
         await t.expect(MainBars.inboxBtn.exists).ok({timeout:10000});
     });
 
+    //Testing git with 2 accounts
 dataTask.forEach( (data, index) => {
     test(`Create task with title - ${data.title}`, async t => {
 
