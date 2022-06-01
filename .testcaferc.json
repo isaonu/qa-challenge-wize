@@ -1,0 +1,19 @@
+{
+    "browsers": "chrome:headless",
+    "src": "POM/test/login.test.js",
+    "screenshots": {
+        "path": "./results/screenshots/",
+        "takeOnFails": true,
+        "fullPage": false
+    },
+    "reporter": {
+        "name": "json",
+        "output": "results/report.json"
+    },
+    "skipJsErros": true,
+    "concurrency": 3,
+    "selectorTimeOut": 5000,
+    "assertionTimeout": 4000,
+    "pageLoadTimeout": 4000,
+    "speed": 0.5
+}
