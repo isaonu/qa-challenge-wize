@@ -12,34 +12,46 @@ class TodayPage{
         //Regex expression in withAttribute
         this.dueTodayBtn = Selector('button').withAttribute('data-action-hint', /today/);
         this.dueTomorrowBtn = Selector('button').withAttribute('data-action-hint', /tomorrow/);
-        this.dueNextWeekendBtn = Selector('button').withAttribute('data-action-hint', /thisWeekend/);
+        //Check this not sure if it may change to thisWeekend depending on the day
+        this.dueNextWeekendBtn = Selector('button').withAttribute('data-action-hint', /nextWeekend/);
         this.dueNextWeekBtn = Selector('button').withAttribute('data-action-hint', /nextWeek/);
         this.dueNoDateBtn = Selector('button').withAttribute('data-action-hint', /noDate/);
     };
 
     async createTaskWithGivenDate(title, description, exactDate){
+        await t.click(this.newTaskBtn);
         await this.fillTaskInfo(title, description);
-        await t.click(this.dueDateBtn)
-                .typeText(this.dateInput, exactDate)
-                .pressKey('enter')
-                .click(this.createTaskBtn)
-                .wait(1000);
+        await this.addGivenDateToNewTask(exactDate);
+    };
+
+    async addGivenDateToNewTask(exactDate){
+        await t
+            .click(this.dueDateBtn)
+            .typeText(this.dateInput, exactDate)
+            .pressKey('enter')
+            .click(this.createTaskBtn)
+            .wait(1000);
     };
 
     async createTaskForAFixeddOption(title, description, time){
+        await t.click(this.newTaskBtn)
         await this.fillTaskInfo(title, description);
+        await this.addFixedOptioneDateForNewTask(time);
+    };
+
+    async addFixedOptioneDateForNewTask(time){
         await t.click(this.dueDateBtn);
         switch(time){
             case 'today':
-                await t.click(this.dueDateBtn);
+                await t.pressKey('esc')
                 break;
             case 'tomorrow':
                 await t.click(this.dueTomorrowBtn);
                 break;
-            case 'next weekend':
+            case 'next_weekend':
                 await t.click(this.dueNextWeekendBtn);
                 break;
-            case 'next week':
+            case 'next_week':
                 await t.click(this.dueNextWeekBtn);
                 break;
             case 'no date':
@@ -47,6 +59,8 @@ class TodayPage{
                 break;
             default:
                 console.log(`Wrong fixed options ${time}`);
+                //Failing test if we get here
+                await t.expect(false).ok()
                 break;
         }
         await t.click(this.createTaskBtn);
@@ -55,10 +69,26 @@ class TodayPage{
 
     async fillTaskInfo(title, description){
         await t
-            .click(this.newTaskBtn)
             .typeText(this.taskTitleInput, title)
             .typeText(this.taskDescriptionInput, description);
     }
+
+    async createMultipleTask(numberOfTask, dataTask){
+        if(numberOfTask > dataTask.length){
+            console.log(`NumberOfTask must be equal or less than ${dataTask.length}`);
+            return
+        };
+
+        await t.click(this.newTaskBtn)
+        for(let data of dataTask){
+            await this.fillTaskInfo(data.title, data.description);
+            if(data.dateOption == 'future'){
+                await this.addGivenDateToNewTask(data.date);
+            }else{
+                await this.addFixedOptioneDateForNewTask(data.dateOption);
+            }   
+        };
+    };
 };
 
 export default new TodayPage();

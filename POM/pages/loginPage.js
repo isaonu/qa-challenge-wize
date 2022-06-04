@@ -8,7 +8,7 @@ class LoginPage{
         this.loginBtn = Selector('button[type="submit"]');
         this.errorMsgEmail = this.email.parent().parent().nextSibling(0);
         this.errorMsgPassword = this.password.parent().parent().nextSibling(0);
-        this.errorEmailOrPass = this.email.parent().parent().parent().parent().prevSibling(-1);
+        this.errorEmailOrPass = this.email.parent().parent().parent().parent().child(0);
     };
 
     async makeLogin(email, password){

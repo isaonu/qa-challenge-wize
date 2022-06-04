@@ -1,55 +1,55 @@
 [
     {
         "title" : "Regar plantas",
-        "descripion" : "Regar las plantas de las jardineras y de la sala",
+        "description" : "Regar las plantas de las jardineras y de la sala",
         "dateOption": "future",
-        "date": "Ago 14"
+        "date": "Aug 14"
     },
     {
         "title" : "Ejercicio",
-        "descripion" : "Ir a la clase de yoga",
+        "description" : "Ir a la clase de yoga",
         "dateOption": "today"
     },
     {
         "title" : "Junta de condominio",
-        "descripion" : "Ir a la junta de condominio para habler el tema del porton",
-        "dateOption": "next week"
+        "description" : "Ir a la junta de condominio para habler el tema del porton",
+        "dateOption": "next_week"
     },
     {
         "title" : "Clases de manejo",
-        "descripion" : "Inscribirme en la clases de manejo del centro",
-        "dateOption": "next weekend"
+        "description" : "Inscribirme en la clases de manejo del centro",
+        "dateOption": "next_week"
     },
     {
         "title" : "Pedir cita Odontolog",
-        "descripion" : "Perdi la cita para la limpieza",
-        "dateOption": "next week"
+        "description" : "Perdi la cita para la limpieza",
+        "dateOption": "next_week"
     },
     {
         "title" : "Hacer supermercado",
-        "descripion" : "Comida de 15 dias",
-        "dateOption": "next weekend"
+        "description" : "Comida de 15 dias",
+        "dateOption": "next_week"
     },
     {
         "title" : "Pagar la renta",
-        "descripion" : "N/A",
+        "description" : "N/A",
         "dateOption": "no date"
     },
     {
         "title" : "Pager prestamo",
-        "descripion" : "N/A",
+        "description" : "N/A",
         "dateOption": "future",
         "date": "Nov 25"
     },
     {
         "title" : "Cancelar suscripcion",
-        "descripion" : "Cancelar suscripcion de netflix",
+        "description" : "Cancelar suscripcion de netflix",
         "dateOption": "future",
-        "date": "DIC 25"
+        "date": "Dec 25"
     },
     {
         "title" : "Buscar lentes",
-        "descripion" : "El la plaza paseo queretaro",
+        "description" : "El la plaza paseo queretaro",
         "dateOption": "future",
         "date": "Oct 20 "
     }

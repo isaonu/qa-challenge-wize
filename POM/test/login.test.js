@@ -6,10 +6,10 @@ import { EMAIL, PASSWORD } from '../data/configVariables.js';
 
 const windowLocation = ClientFunction(() => window.location);
 
-fixture('Login test cases')
+fixture('User can login')
     .page('https://todoist.com/auth/login');
 
-test.only('Login - Correct Credentials', async t => {
+test('A user can login with correct credentials', async t => {
     await LoginPage.makeLogin(EMAIL, PASSWORD);
     //It seems that when we chain expects we are triggering them at the same time
     //to that why Ive call them separatly. ASK THIS, MAYBE IS NOT THE CORRECT WAY
@@ -17,7 +17,7 @@ test.only('Login - Correct Credentials', async t => {
     await t.expect((await windowLocation()).href).eql(TodayPage.url);
 });
 
-test('Login - Wrong email', async t => {
+test('A user cant login with wrong email', async t => {
     await LoginPage.inputEmail('nonexistingemail@gmail.com');
     await LoginPage.inputPassword(PASSWORD);
     await LoginPage.clickLoginBtn();
@@ -26,7 +26,7 @@ test('Login - Wrong email', async t => {
     await t.expect((await windowLocation()).href).eql(LoginPage.url);
 });
 
-test('Login - Wrong password', async t => {
+test('A user cant login with a wrong password', async t => {
     await LoginPage.inputEmail(EMAIL);
     await LoginPage.inputPassword('wrongpass');
     await LoginPage.clickLoginBtn();
@@ -35,7 +35,7 @@ test('Login - Wrong password', async t => {
     await t.expect((await windowLocation()).href).eql(LoginPage.url);
 });
 
-test('Login - Empty email', async t => {
+test('A user cant login with an empty email', async t => {
     await LoginPage.inputPassword(PASSWORD);
     await LoginPage.clickLoginBtn();
 
@@ -44,7 +44,7 @@ test('Login - Empty email', async t => {
 
 });
 
-test('Login - Empty password', async t => {
+test('A user cant login with an empty password', async t => {
     await LoginPage.inputEmail(EMAIL);
     await LoginPage.clickLoginBtn();
 
