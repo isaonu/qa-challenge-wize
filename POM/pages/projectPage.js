@@ -1,6 +1,6 @@
 import { Selector, t } from 'testcafe';
 
-class InboxPage{
+class ProjectPage{
     constructor(){
         this.taskBody = Selector('.task_list_item__body');
         this.taskItemClass = '.task_list_item__content';
@@ -69,6 +69,10 @@ class InboxPage{
         };
     };
 
+    /*
+     * delete a task
+     * @param {object} givenTask - One testcafe selector as type this.taskBody
+     */
     async deleteTask(givenTask){
         await t
             .hover(givenTask)
@@ -81,6 +85,10 @@ class InboxPage{
             .wait(1000);
     };
 
+    /*
+     * delete a task base on its title
+     * @param {string} title - The title of the task to be deleted
+     */
     async deleteTaskWithTitle(title){
         const cleanTitle = title.replace(/\s/g,'\u00a0');
         const taskWithTitle = this.taskBody.withText(cleanTitle);
@@ -88,6 +96,9 @@ class InboxPage{
        await this.deleteTask(taskWithTitle);
     };
 
+    /*
+     * delete a all existing task in a project
+     */
     async deleteAllTasks(){
         const existingTasks = await this.taskBody.count;
         for(let i=0; i < existingTasks; i++){
@@ -96,4 +107,4 @@ class InboxPage{
     };
 }
 
-export default new InboxPage();
+export default new ProjectPage();

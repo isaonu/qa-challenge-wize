@@ -18,12 +18,22 @@ class TodayPage{
         this.dueNoDateBtn = Selector('button').withAttribute('data-action-hint', /noDate/);
     };
 
+     /*
+     * Create a task with a given title, description and exact date
+     * @param {string} title - The title of the task
+     * @param {string} description - The description of the task
+     * @param {string} exactDate - Is a string containing a month and date, i.e Dec 20
+     */
     async createTaskWithGivenDate(title, description, exactDate){
         await t.click(this.newTaskBtn);
         await this.fillTaskInfo(title, description);
         await this.addGivenDateToNewTask(exactDate);
     };
 
+    /*
+     * Add a specific date to a task being created
+     * @param {string} exactDate - Is a string containing a month and date, i.e Dec 20
+     */
     async addGivenDateToNewTask(exactDate){
         await t
             .click(this.dueDateBtn)
@@ -33,12 +43,22 @@ class TodayPage{
             .wait(1000);
     };
 
+    /*
+     * Creates a task with a title, description and a given string date
+     * @param {string} title - The title of the task
+     * @param {string} description - The description of the task
+     * @param {string} time - Is a string for a existing string option, i.e today, tomorrow
+     */
     async createTaskForAFixeddOption(title, description, time){
         await t.click(this.newTaskBtn)
         await this.fillTaskInfo(title, description);
         await this.addFixedOptioneDateForNewTask(time);
     };
 
+    /*
+     * Add the string date for a task being created
+     * @param {string} time - Is a string for a existing string option, i.e today, tomorrow
+     */
     async addFixedOptioneDateForNewTask(time){
         await t.click(this.dueDateBtn);
         switch(time){
@@ -67,12 +87,22 @@ class TodayPage{
         await t.wait(1000);
     };
 
+     /*
+     * Add the title and the description to a task being created
+     * @param {string} title - The title of the task
+     * @param {string} description - The description of the task
+     */
     async fillTaskInfo(title, description){
         await t
             .typeText(this.taskTitleInput, title)
             .typeText(this.taskDescriptionInput, description);
     }
 
+     /*
+     * Create many task in a project
+     * @param {number} numberOfTask - The number of tasks to be created, which shouldnt be greater than the data in dataTask
+     * @param {string} dataTask - An object with the data of n tasks
+     */
     async createMultipleTask(numberOfTask, dataTask){
         if(numberOfTask > dataTask.length){
             console.log(`NumberOfTask must be equal or less than ${dataTask.length}`);

@@ -1,10 +1,9 @@
 import LoginPage from '../pages/loginPage';
 import TodayPage from '../pages/todayPage';
 import MainBars from '../pages/mainBars';
-import InboxPage from '../pages/inboxPage';
+import ProjectPage from '../pages/projectPage';
 import { EMAIL, PASSWORD } from '../data/configVariables.js';
 import dataTask from '../data/taskData.json';
-//const dataTask = require('../data/taskData.json');
 
 fixture('Multiple tasks')
     .page('https://todoist.com/auth/login')
@@ -16,13 +15,13 @@ fixture('Multiple tasks')
     //test teardown to clean environment
     .afterEach(async ctx => {
         await MainBars.goToInbox();
-        await InboxPage.deleteAllTasks();
+        await ProjectPage.deleteAllTasks();
     });
 
 test('A user can create multiple task within a session', async t => {
     await TodayPage.createMultipleTask(10, dataTask);
     await MainBars.goToInbox();
-    await InboxPage.assertTitleAndDateMultipleTasks(dataTask);
+    await ProjectPage.assertTitleAndDateMultipleTasks(dataTask);
 } );
 
 

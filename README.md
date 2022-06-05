@@ -10,7 +10,7 @@ It also integrates other resources/libraries as eslint to have a proper standar 
 In order to use and play around with this project, you can follow the next steps.
 1) Clone the repo in your local machine
 2) Install node in your machine *https://nodejs.org/en/*
-3) In the folder of your project, in the termina type: 
+3) Install the needed libraries; in the folder of your project, in the termina type: 
 > npm install
 4) Create your .env file, in the main folder, with your variables. Example shown after the steps 
 5) In the terminal of your project type: 

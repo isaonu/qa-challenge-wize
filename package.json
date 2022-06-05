@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "testcafe chrome POM/test/*",
+    "test": "testcafe chrome POM/test/login.test.js",
     "test-debug": "testcafe chrome POM/test/newTasks.test.js --debug-mode",
     "testcafeConfig": "testcafe"
   },

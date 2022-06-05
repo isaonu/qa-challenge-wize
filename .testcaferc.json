@@ -1,17 +1,23 @@
 {
-    "browsers": "chrome:headless",
-    "src": "POM/test/login.test.js",
+    "browsers": "chrome",
+    "src": "POM/test/*",
     "screenshots": {
         "path": "./results/screenshots/",
         "takeOnFails": true,
         "fullPage": false
     },
-    "reporter": {
+    "reporter": [
+        {
+        "name" : "spec"
+        }
+        ,
+        {
         "name": "json",
         "output": "results/report.json"
-    },
+        }
+        ]
+    ,
     "skipJsErros": true,
-    "concurrency": 3,
     "selectorTimeOut": 5000,
     "assertionTimeout": 4000,
     "pageLoadTimeout": 4000,
