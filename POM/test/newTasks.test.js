@@ -13,12 +13,12 @@ fixture('User can create new tasks')
         await t.expect(MainBars.inboxBtn.exists).ok({timeout:10000});
     })
     //test teardown to clean environment
-    .afterEach(async ctx => {
+    .afterEach(async () => {
         await MainBars.goToInbox();
         await ProjectPage.deleteAllTasks();
     });
 
-test('A user can create one task with a Given date', async () => {
+test.only('A user can create one task with a Given date', async () => {
     await TodayPage.createTaskWithGivenDate('Pintar', 'Pintar un paisaje', 'Dec 20');
     await MainBars.goToInbox();
     await ProjectPage.assertTaskTitleAndDateType('Pintar', 'future');

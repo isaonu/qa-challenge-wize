@@ -13,12 +13,12 @@ fixture('Multiple tasks')
         await t.expect(MainBars.inboxBtn.exists).ok({timeout:10000});
     })
     //test teardown to clean environment
-    .afterEach(async ctx => {
+    .afterEach(async () => {
         await MainBars.goToInbox();
         await ProjectPage.deleteAllTasks();
     });
 
-test('A user can create multiple task within a session', async t => {
+test('A user can create multiple task within a session', async () => {
     await TodayPage.createMultipleTask(10, dataTask);
     await MainBars.goToInbox();
     await ProjectPage.assertTitleAndDateMultipleTasks(dataTask);
