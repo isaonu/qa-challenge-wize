@@ -13,22 +13,22 @@
     {
         "title" : "Junta de condominio",
         "description" : "Ir a la junta de condominio para habler el tema del porton",
-        "dateOption": "next_week"
+        "dateOption": "next week"
     },
     {
         "title" : "Clases de manejo",
         "description" : "Inscribirme en la clases de manejo del centro",
-        "dateOption": "next_week"
+        "dateOption": "next week"
     },
     {
         "title" : "Pedir cita Odontolog",
         "description" : "Perdi la cita para la limpieza",
-        "dateOption": "next_week"
+        "dateOption": "next week"
     },
     {
         "title" : "Hacer supermercado",
         "description" : "Comida de 15 dias",
-        "dateOption": "next_week"
+        "dateOption": "next week"
     },
     {
         "title" : "Pagar la renta",

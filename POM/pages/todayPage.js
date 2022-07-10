@@ -11,11 +11,14 @@ class TodayPage{
         this.dateInput = Selector('.scheduler-input>input');
         //Regex expression in withAttribute
         this.dueTodayBtn = Selector('button').withAttribute('data-action-hint', /today/);
-        this.dueTomorrowBtn = Selector('button').withAttribute('data-action-hint', /tomorrow/);
-        //Check this not sure if it may change to thisWeekend depending on the day
-        this.dueNextWeekendBtn = Selector('button').withAttribute('data-action-hint', /nextWeekend/);
-        this.dueNextWeekBtn = Selector('button').withAttribute('data-action-hint', /nextWeek/);
-        this.dueNoDateBtn = Selector('button').withAttribute('data-action-hint', /noDate/);
+        this.dueTomorrowBtn = Selector('button').withText('Tomorrow');
+        //this.dueTomorrowBtn = Selector('button').withAttribute('data-action-hint', /tomorrow/);
+        this.dueNextWeekendBtn = Selector('button').withText('Next weekend');
+        //this.dueNextWeekendBtn = Selector('button').withAttribute('data-action-hint', /nextWeekend/);
+        this.dueNextWeekBtn = Selector('div').withExactText('Next week');
+        //this.dueNextWeekBtn = Selector('button').withAttribute('data-action-hint', /nextWeek/);
+        this.dueNoDateBtn = Selector('button').withText('No Date');
+        //this.dueNoDateBtn = Selector('button').withAttribute('data-action-hint', /noDate/);
     };
 
      /*
@@ -57,22 +60,28 @@ class TodayPage{
 
     /*
      * Add the string date for a task being created
-     * @param {string} time - Is a string for a existing string option, i.e today, tomorrow
+     * @param {string} time - Is a string for a existing string option, Today, Tomorrow, next weekend, next week, no date
      */
     async addFixedOptioneDateForNewTask(time){
+        
         await t.click(this.dueDateBtn);
-        switch(time){
+        switch(time.toLowerCase()){
             case 'today':
                 await t.pressKey('esc')
                 break;
             case 'tomorrow':
                 await t.click(this.dueTomorrowBtn);
                 break;
-            case 'next_weekend':
+            case 'next weekend':
                 await t.click(this.dueNextWeekendBtn);
                 break;
-            case 'next_week':
-                await t.click(this.dueNextWeekBtn);
+            case 'next week':
+                const d = new Date();
+                let day = d.getDay();
+                if(day == 0){
+                    await t.click(this.dueTomorrowBtn);
+                }else
+                    await t.click(this.dueNextWeekBtn);
                 break;
             case 'no date':
                 await t.click(this.dueNoDateBtn);

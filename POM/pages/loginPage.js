@@ -11,6 +11,9 @@ class LoginPage{
         this.errorEmailOrPass = this.email.parent().parent().parent().parent().child(0);
     };
 
+    /*
+    * Makes the whole flow for login
+    */
     async makeLogin(email, password){
         await this.inputEmail(email);
         await this.inputPassword(password);
