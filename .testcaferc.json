@@ -1,16 +1,16 @@
 {
-    "browsers": "chrome:",
-    "src": "POM/test/*",
+    "browsers": "chrome",
+    "src": "POM/test/createMultipleTasks.test.js",
     "screenshots": {
         "path": "./results/screenshots/",
-        "takeOnFails": true,
+        "takeOnFails": false,
         "fullPage": false
     },
     "reporter": [
         {
-        "name" : "spec"
-        }
-        ,
+        "name": "xunit",
+        "output": "results/report.xml"
+        },
         {
         "name": "json",
         "output": "results/report.json"
