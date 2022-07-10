@@ -1,8 +1,6 @@
 import { Selector, t } from 'testcafe';
 
 class ProjectPage{
-    #validationFixedDates = ['Today', 'Tomorrow', 'Monday', 'Saturday'];
-    #fixedDates = ['Today', 'Tomorrow', 'Next week', 'Next weekend'];
     constructor(){
         this.taskBody = Selector('.task_list_item__body');
         this.taskItemClass = '.task_list_item__content';
@@ -32,8 +30,17 @@ class ProjectPage{
     async assertTaskDate(title, date){
         await this.openTaskWindow(title);
         const currentTaskDate = await this.dueDateTaskWindow.innerText;
-        await this.closeTaskWindow()
-        await t.expect(currentTaskDate).eql(date);  
+        await this.closeTaskWindow();
+        const d = new Date();
+        let day = d.getDay();
+        let validationDate = date;
+        //When creating a task on Sunday or Friday, next week and next Weekend will be Tomorrow respectively.
+        if(day == 0 && date == 'Monday'){
+            validationDate = 'Tomorrow';
+        }else if(day == 6 && date == 'Saturday'){
+            validationDate = 'Tomorrow';
+        }
+        await t.expect(currentTaskDate).eql(validationDate, `Task '${title}' doesnt match expected date`);  
     };
 
     /*
@@ -41,7 +48,6 @@ class ProjectPage{
      * @param {string} title - The expected title of the task
      * @param {string} type - The type of date , i.e today, tomorrow, next week
      */
-    //async assertTaskTitleAndDateType(title, type){
     async assertTaskTitleAndDate(title, date){
         title = title.replace(/\s/g,'\u00a0');
         await this.assertTaskTitle(title);
@@ -69,8 +75,8 @@ class ProjectPage{
             //Replacing white spaces with unicode representation of $nbsp;
             title = data.title.replace(/\s/g,'\u00a0');
             await this.assertTaskTitle(title);
-            if(data.dateOption != 'no date' && data.dateOption != 'future'){
-                await this.assertTaskDate(title, data.dateOption);
+            if(data.dateOption != 'No date' && data.dateOption != 'future'){
+                await this.assertTaskDate(title, data.validationDate);
             }else if(data.dateOption == 'future'){
                 await this.assertTaskDate(title, data.date);
             }

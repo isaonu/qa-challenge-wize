@@ -1,5 +1,5 @@
 import LoginPage from '../pages/loginPage';
-import TodayPage from '../pages/todayPage';
+import CreateTaskPage from '../pages/createTaskPage';
 import MainBars from '../pages/mainBars';
 import ProjectPage from '../pages/projectPage';
 import CreateProjectPage from '../pages/createProjectPage';
@@ -19,14 +19,14 @@ test('User can create a new project', async () => {
 
 test('User can add task to an empty custom project', async () => {
     await MainBars.goToProject('test20');
-    await TodayPage.createTaskForAFixeddOption('Pintar4', 'Pintar un paisaje4', 'Next week');
+    await CreateTaskPage.createTaskForAFixeddOption('Pintar4', 'Pintar un paisaje4', 'Next week');
     await ProjectPage.assertTaskTitleAndDate('Pintar4', 'Monday');
     await ProjectPage.deleteProject('test20');
 });
 
 test('User can create a project and inmidiately add a task', async ()=> {
     await CreateProjectPage.creteNewProject('test30', 'Grape');
-    await TodayPage.createTaskForAFixeddOption('Pintar4', 'Pintar un paisaje4', 'Next weekend');
+    await CreateTaskPage.createTaskForAFixeddOption('Pintar4', 'Pintar un paisaje4', 'Next weekend');
     await ProjectPage.assertTaskTitleAndDate('Pintar4', 'Saturday');
     await ProjectPage.deleteProject('test30');
 });

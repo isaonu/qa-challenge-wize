@@ -1,5 +1,5 @@
 import LoginPage from '../pages/loginPage';
-import TodayPage from '../pages/todayPage';
+import CreateTaskPage from '../pages/createTaskPage';
 import MainBars from '../pages/mainBars';
 import ProjectPage from '../pages/projectPage';
 import { EMAIL, PASSWORD } from '../data/configVariables.js';
@@ -19,7 +19,7 @@ fixture('Multiple tasks')
     });
 
 test('A user can create multiple task within a session', async () => {
-    await TodayPage.createMultipleTask(10, dataTask);
+    await CreateTaskPage.createMultipleTask(10, dataTask);
     await MainBars.goToInbox();
     await ProjectPage.assertTitleAndDateMultipleTasks(dataTask);
 } );

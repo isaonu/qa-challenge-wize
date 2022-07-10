@@ -8,32 +8,37 @@
     {
         "title" : "Ejercicio",
         "description" : "Ir a la clase de yoga",
-        "dateOption": "today"
+        "dateOption": "Today",
+        "validationDate": "Today"
     },
     {
         "title" : "Junta de condominio",
         "description" : "Ir a la junta de condominio para habler el tema del porton",
-        "dateOption": "next week"
+        "dateOption": "Next week",
+        "validationDate": "Monday"
     },
     {
         "title" : "Clases de manejo",
         "description" : "Inscribirme en la clases de manejo del centro",
-        "dateOption": "next week"
+        "dateOption": "Next weekend",
+        "validationDate": "Saturday"
     },
     {
         "title" : "Pedir cita Odontolog",
         "description" : "Perdi la cita para la limpieza",
-        "dateOption": "next week"
+        "dateOption": "Next week",
+        "validationDate": "Monday"
     },
     {
         "title" : "Hacer supermercado",
         "description" : "Comida de 15 dias",
-        "dateOption": "next week"
+        "dateOption": "Next week",
+        "validationDate": "Monday"
     },
     {
         "title" : "Pagar la renta",
         "description" : "N/A",
-        "dateOption": "no date"
+        "dateOption": "No date"
     },
     {
         "title" : "Pager prestamo",
@@ -51,6 +56,6 @@
         "title" : "Buscar lentes",
         "description" : "El la plaza paseo queretaro",
         "dateOption": "future",
-        "date": "Oct 20 "
+        "date": "Oct 20"
     }
 ]

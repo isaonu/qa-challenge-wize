@@ -1,8 +1,7 @@
 import { Selector, t } from 'testcafe';
 
-class TodayPage{
+class CreateTaskPage{
     constructor(){
-        this.url = 'https://todoist.com/app/today';
         this.newTaskBtn = Selector('button.plus_add_button');
         this.taskTitleInput = Selector('div').withAttribute('role','textbox');
         this.taskDescriptionInput = Selector('textarea').withAttribute('placeholder', 'Description');
@@ -12,13 +11,9 @@ class TodayPage{
         //Regex expression in withAttribute
         this.dueTodayBtn = Selector('button').withAttribute('data-action-hint', /today/);
         this.dueTomorrowBtn = Selector('button').withText('Tomorrow');
-        //this.dueTomorrowBtn = Selector('button').withAttribute('data-action-hint', /tomorrow/);
         this.dueNextWeekendBtn = Selector('button').withText('Next weekend');
-        //this.dueNextWeekendBtn = Selector('button').withAttribute('data-action-hint', /nextWeekend/);
         this.dueNextWeekBtn = Selector('div').withExactText('Next week');
-        //this.dueNextWeekBtn = Selector('button').withAttribute('data-action-hint', /nextWeek/);
         this.dueNoDateBtn = Selector('button').withText('No Date');
-        //this.dueNoDateBtn = Selector('button').withAttribute('data-action-hint', /noDate/);
     };
 
      /*
@@ -130,4 +125,4 @@ class TodayPage{
     };
 };
 
-export default new TodayPage();
+export default new CreateTaskPage();
