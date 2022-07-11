@@ -14,7 +14,7 @@ In order to use and play around with this project, you can follow the next steps
 > npm install
 4) Create your .env file, in the main folder, with your variables. Example shown after the steps 
 5) In the terminal of your project type: 
-> npm run test
+> npm run testcafeConfig
 
 
 **For step 4**, it is mentioned that you have to create your .env file with the needed variables, the content of this file will look like this:

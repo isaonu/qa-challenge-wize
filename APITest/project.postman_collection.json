@@ -1,0 +1,374 @@
+{
+	"info": {
+		"_postman_id": "94d92bcd-01e0-4ef7-a399-d930c337b9ef",
+		"name": "project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20647269"
+	},
+	"item": [
+		{
+			"name": "getProjects",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const bodyResponse = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Common projects fields in response are present\", function() {",
+							"    for(let i = 0; i < bodyResponse.length; i++){",
+							"        pm.expect(bodyResponse[i]).to.be.an('object')",
+							"        pm.expect(bodyResponse[i]).to.have.property(\"id\");",
+							"        pm.expect(bodyResponse[i]).to.have.property(\"color\");",
+							"        pm.expect(bodyResponse[i]).to.have.property(\"name\");",
+							"        pm.expect(bodyResponse[i]).to.have.property(\"comment_count\");",
+							"        pm.expect(bodyResponse[i]).to.have.property(\"shared\");",
+							"        pm.expect(bodyResponse[i]).to.have.property(\"favorite\");",
+							"        pm.expect(bodyResponse[i]).to.have.property(\"sync_id\");",
+							"        pm.expect(bodyResponse[i]).to.have.property(\"url\");",
+							"    }",
+							"});",
+							"",
+							"validReponseTime = pm.environment.get('validResponseTime')",
+							"pm.test(`Response time is within ${validReponseTime}`, function() {",
+							"    pm.expect(pm.response.responseTime).to.be.below(parseInt(validReponseTime));",
+							"});",
+							"",
+							"pm.test(\"Validate response body fields types\", function(){",
+							"    for(let i = 0; i < bodyResponse.length; i++){",
+							"        pm.expect(bodyResponse[i].id).to.be.a(\"number\");",
+							"        pm.expect(bodyResponse[i].color).to.be.a(\"number\");",
+							"        pm.expect(bodyResponse[i].name).to.be.a(\"string\");",
+							"        pm.expect(bodyResponse[i].comment_count).to.be.a(\"number\");",
+							"        pm.expect(bodyResponse[i].shared).to.be.a(\"boolean\");",
+							"        pm.expect(bodyResponse[i].favorite).to.be.a(\"boolean\");",
+							"        pm.expect(bodyResponse[i].sync_id).to.be.a(\"number\");",
+							"        pm.expect(bodyResponse[i].url, \"Url is not string type\").to.be.a(\"string\");",
+							"        pm.expect(bodyResponse[i].url).to.match(/https:\\/\\/.*/);",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.todoist.com/rest/v1/projects",
+					"protocol": "https",
+					"host": [
+						"api",
+						"todoist",
+						"com"
+					],
+					"path": [
+						"rest",
+						"v1",
+						"projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createProject",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//const projectName = \"Maraton2023\";",
+							"//pm.environment.set(\"newProjectName\", projectName);",
+							"",
+							"// const colorId = 31;",
+							"// pm.environment.set(\"colorId\", colorId)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const bodyResponse = pm.response.json();",
+							"",
+							"pm.test('Status code is 200', function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Task title is correct', () => {",
+							"    pm.expect(bodyResponse.name).to.be.eql(pm.environment.get('newProjectName'));",
+							"",
+							"});",
+							"",
+							"pm.test('Task color is correct', () => {",
+							"    pm.expect(`${bodyResponse.color}`).to.be.equal(pm.environment.get('colorId'));",
+							"});",
+							"",
+							"pm.test('Only one object is in the body response', () => {",
+							"    pm.expect(bodyResponse).to.be.an(\"object\");",
+							"});",
+							"",
+							"validReponseTime = pm.environment.get('validResponseTime');",
+							"pm.test(`Response time is within ${validReponseTime}`, function() {",
+							"    pm.expect(pm.response.responseTime).to.be.below(parseInt(validReponseTime));",
+							"});",
+							"",
+							"//Getting the id of the project so we can use it later",
+							"pm.environment.set(\"newProjectId\", bodyResponse.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Request-Id",
+						"value": "{{$guid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{newProjectName}}\",\n    \"color\" : \"{{colorId}}\"\n}"
+				},
+				"url": {
+					"raw": "https://api.todoist.com/rest/v1/projects",
+					"protocol": "https",
+					"host": [
+						"api",
+						"todoist",
+						"com"
+					],
+					"path": [
+						"rest",
+						"v1",
+						"projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const bodyResponse = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test('Task title is correct', () => {",
+							"    pm.expect(bodyResponse.name).to.be.eql(pm.environment.get('newProjectName'));",
+							"",
+							"});",
+							"pm.test('Task color is correct', () => {",
+							"    pm.expect(`${bodyResponse.color}`).to.be.eql(pm.environment.get('colorId'));",
+							"});",
+							"",
+							"pm.test('Only one object is in the body response', () => {",
+							"    pm.expect(bodyResponse).to.be.an(\"object\");",
+							"});",
+							"",
+							"validReponseTime = pm.environment.get('validResponseTime');",
+							"pm.test(`Response time is within ${validReponseTime}`, function() {",
+							"    pm.expect(pm.response.responseTime).to.be.below(parseInt(validReponseTime));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Request-Id",
+						"value": "{{$guid}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.todoist.com/rest/v1/projects/{{newProjectId}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"todoist",
+						"com"
+					],
+					"path": [
+						"rest",
+						"v1",
+						"projects",
+						"{{newProjectId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateProject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});",
+							"",
+							"pm.test(\"Body response is empty\", () => {",
+							"    pm.response.to.not.have.header('Content-Length');",
+							"});",
+							"",
+							"validReponseTime = pm.environment.get('validResponseTime');",
+							"pm.test(`Response time is within ${validReponseTime}`, function() {",
+							"    pm.expect(pm.response.responseTime).to.be.below(parseInt(validReponseTime));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Request-Id",
+						"value": "{{$guid}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Plan de estudio\"\n}"
+				},
+				"url": {
+					"raw": "https://api.todoist.com/rest/v1/projects/{{newProjectId}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"todoist",
+						"com"
+					],
+					"path": [
+						"rest",
+						"v1",
+						"projects",
+						"{{newProjectId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteProject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});",
+							"",
+							"pm.test(\"Body response is empty\", () => {",
+							"    pm.response.to.not.have.header('Content-Length');",
+							"});",
+							"",
+							"validReponseTime = pm.environment.get('validResponseTime');",
+							"pm.test(`Response time is within ${validReponseTime}`, function() {",
+							"    pm.expect(pm.response.responseTime).to.be.below(parseInt(validReponseTime));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api.todoist.com/rest/v1/projects/{{newProjectId}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"todoist",
+						"com"
+					],
+					"path": [
+						"rest",
+						"v1",
+						"projects",
+						"{{newProjectId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
