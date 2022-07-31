@@ -1,6 +1,6 @@
 {
     "browsers": "chrome",
-    "src": "POM/test/*",
+    "src": "POM/test/login.test.js",
     "screenshots": {
         "path": "./results/screenshots/",
         "takeOnFails": false,
