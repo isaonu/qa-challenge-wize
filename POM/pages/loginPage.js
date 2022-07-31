@@ -15,7 +15,6 @@ class LoginPage{
     * Makes the whole flow for login
     */
     async makeLogin(email, password){
-        console.log(email);
         await this.inputEmail(email);
         await this.inputPassword(password);
         await this.clickLoginBtn();
