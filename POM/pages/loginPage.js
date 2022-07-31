@@ -3,8 +3,8 @@ import { Selector, t} from 'testcafe';
 class LoginPage{
     constructor(){
         this.url = 'https://todoist.com/auth/login';
-        this.email = Selector('#labeled-input-1');
-        this.password = Selector('#labeled-input-3');
+        this.email = Selector('input[type="email"]');
+        this.password = Selector('input[type="password"]');
         this.loginBtn = Selector('button[type="submit"]');
         this.errorMsgEmail = this.email.parent().parent().nextSibling(0);
         this.errorMsgPassword = this.password.parent().parent().nextSibling(0);
@@ -15,6 +15,7 @@ class LoginPage{
     * Makes the whole flow for login
     */
     async makeLogin(email, password){
+        console.log(email);
         await this.inputEmail(email);
         await this.inputPassword(password);
         await this.clickLoginBtn();
