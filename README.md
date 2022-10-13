@@ -3,7 +3,7 @@
 
 ## About
 This is a proof of concept (POC) for testing the UI of the website *https://todoist.com/* with **Testcafe**. 
-It also integrates other resources/libraries as eslint to have a proper standar in the code and testcafe-reporter-json to have some reporting file and jenkins for the CI/CD.
+It also integrates other resources/libraries as eslint to have a proper standard in the code and testcafe-reporter-json to have some reporting file and jenkins for the CI/CD.
 
 
 ## How to use this project
@@ -22,3 +22,6 @@ In order to use and play around with this project, you can follow the next steps
 EMAIL="yourEmailAccount@yourDomain.com"
 PASSWORD="yourPassword"
 ```
+
+## BrowserStack
+To be able to run the project in our BrowserStack account, we need to do the following:

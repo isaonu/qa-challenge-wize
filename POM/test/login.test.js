@@ -1,6 +1,5 @@
-import { ClientFunction, Selector } from 'testcafe';
+import { ClientFunction } from 'testcafe';
 import LoginPage from '../pages/loginPage';
-import CreateTaskPage from '../pages/createTaskPage';
 import MainBars from '../pages/mainBars';
 import { EMAIL, PASSWORD } from '../data/configVariables.js';
 
@@ -12,7 +11,7 @@ fixture('User can login')
 test('A user can login with correct credentials', async t => {
     await LoginPage.makeLogin(EMAIL, PASSWORD);
     //It seems that when we chain expects we are triggering them at the same time
-    //to that why Ive call them separatly. ASK THIS, MAYBE IS NOT THE CORRECT WAY
+    //to thats why Ive called them separatly. ASK THIS, MAYBE IS NOT THE CORRECT WAY
     await t.expect(MainBars.inboxBtn.exists).ok({timeout:10000});
     await t.expect((await windowLocation()).href).eql('https://todoist.com/app/today');
 });

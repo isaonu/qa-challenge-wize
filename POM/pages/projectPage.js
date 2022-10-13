@@ -23,7 +23,7 @@ class ProjectPage{
     };
     
     /*
-     * Asserts the due fate of the task
+     * Asserts the due date of the task
      * @param {string} title - The expected title of the task
      * @param {string} date - The expected due date of the task
      */
@@ -40,7 +40,10 @@ class ProjectPage{
         }else if(day == 6 && date == 'Saturday'){
             validationDate = 'Tomorrow';
         }
-        await t.expect(currentTaskDate).eql(validationDate, `Task '${title}' doesnt match expected date`);  
+        if(validationDate.toLowerCase().includes('next'))
+            await t.expect(currentTaskDate).eql(validationDate, `Task '${title}' doesnt match expected date`); 
+        else
+            await t.expect(currentTaskDate).contains(validationDate, `Task '${title}' doesnt match expected date`); 
     };
 
     /*
@@ -102,7 +105,7 @@ class ProjectPage{
             .click(givenTask.child('.task_list_item__actions').child('button').withAttribute('data-testid','more_menu'))
             //for example this doesnt work neither
             //.click(Selector('.item_menu_list').child('div').withText('Delete task'))
-            //but the following well...
+            //but the following well... here li is a child of .item_menu ... div is a grand child
             .click(Selector('.item_menu_list').child('li').withText('Delete task'))
             .click(this.btnDeleteTaskPopUp)
             .wait(1000);
@@ -125,6 +128,10 @@ class ProjectPage{
     async deleteAllTasks(){
         const existingTasks = await this.taskBody.count;
         for(let i=0; i < existingTasks; i++){
+            const allTaskDeleted = await Selector('div').withText('All clear').exists;
+            //Using eixsts as a flag
+            if(allTaskDeleted)
+                break;
             await this.deleteTask(this.taskBody.nth(0));
         }
     };

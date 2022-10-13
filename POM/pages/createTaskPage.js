@@ -11,9 +11,12 @@ class CreateTaskPage{
         //Regex expression in withAttribute
         this.dueTodayBtn = Selector('button').withAttribute('data-action-hint', /today/);
         this.dueTomorrowBtn = Selector('button').withText('Tomorrow');
-        this.dueNextWeekendBtn = Selector('button').withText('Next weekend');
+        this.dueNextWeekendBtn = Selector('button').withText('weekend');
         this.dueNextWeekBtn = Selector('div').withExactText('Next week');
         this.dueNoDateBtn = Selector('button').withText('No Date');
+        this.taskPriorirtyPicker = Selector('span').withAttribute('data-action-hint', 'task-actions-priority-picker');
+        //use withText('') to choose the correct one with this locator
+        this.taskPriority = Selector('.priority_picker_item_name');
     };
 
      /*

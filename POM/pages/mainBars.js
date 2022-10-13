@@ -9,7 +9,7 @@ class MainBars{
         this.houseBtn = Selector('button.top_bar_btn.home_btn');
         this.leftMenuOption = Selector('#left_menu a>span:nth-child(2)');
         this.inboxBtn = Selector('#left_menu a>span:nth-child(2)').withText('Inbox');
-        this.addProjectBtn = Selector('[aria-label="Add Project"]');
+        this.addProjectBtn = Selector('[aria-label="Add project"]');
     };
 
     async goToInbox(email){
